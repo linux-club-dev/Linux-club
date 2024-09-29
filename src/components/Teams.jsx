@@ -1,16 +1,20 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import Mentors from "@/components/Mentors";
 import CoreTeam from "@/components/CoreTeam";
 import Leaderboard from "@/components/Leaderboard";
 import Head from "next/head";
 
-export default function Teams() {
+const Teams = () => {
   const containerRef = useRef(null);
-  const [meshBackground, setMeshBackground] = useState(null);
+  const rendererRef = useRef(null);
+  const sceneRef = useRef(null);
+  const cameraRef = useRef(null);
+  const meshRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -19,7 +23,6 @@ export default function Teams() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   useEffect(() => {
-    // Variation: Change geometry and colors
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -28,8 +31,16 @@ export default function Teams() {
       1000
     );
     const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById("mesh-background").appendChild(renderer.domElement);
+    const meshBgElement = document.getElementById("mesh-background");
+    if (meshBgElement) {
+      meshBgElement.appendChild(renderer.domElement);
+    }
 
     const geometry = new THREE.DodecahedronGeometry(5, 0);
     const material = new THREE.MeshBasicMaterial({
@@ -37,25 +48,49 @@ export default function Teams() {
       wireframe: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
+    meshRef.current = mesh;
     scene.add(mesh);
 
     camera.position.z = 15;
 
     const animate = () => {
+      if (
+        meshRef.current &&
+        rendererRef.current &&
+        sceneRef.current &&
+        cameraRef.current
+      ) {
+        meshRef.current.rotation.x += 0.001;
+        meshRef.current.rotation.y += 0.002;
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+      }
       requestAnimationFrame(animate);
-      mesh.rotation.x += 0.001;
-      mesh.rotation.y += 0.002;
-      renderer.render(scene, camera);
     };
     animate();
 
-    setMeshBackground(renderer.domElement);
+    const handleResize = () => {
+      if (cameraRef.current && rendererRef.current) {
+        cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+        cameraRef.current.updateProjectionMatrix();
+        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      renderer.dispose();
-      const meshbgelem = document.getElementById("mesh-background");
-      if (meshbgelem) {
-        meshbgelem.removeChild(renderer.domElement);
+      window.removeEventListener("resize", handleResize);
+      if (
+        rendererRef.current &&
+        rendererRef.current.domElement &&
+        rendererRef.current.domElement.parentNode
+      ) {
+        rendererRef.current.domElement.parentNode.removeChild(
+          rendererRef.current.domElement
+        );
+      }
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
       }
     };
   }, []);
@@ -71,7 +106,7 @@ export default function Teams() {
       </Head>
       <div
         ref={containerRef}
-        className="overflow-hidden min-h-screen text-white bg-black"
+        className="min-h-screen overflow-hidden text-white bg-black"
       >
         <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
         <motion.div
@@ -90,7 +125,7 @@ export default function Teams() {
           }}
         />
         <div className="relative z-30">
-          <section className="flex flex-col justify-center items-center min-h-screen">
+          <section className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="mb-4 text-5xl font-bold">Our Teams</h1>
             <p className="text-xl text-gray-300">
               Meet our mentors, core team members, and see the leaderboard.
@@ -102,4 +137,6 @@ export default function Teams() {
       </div>
     </>
   );
-}
+};
+
+export default Teams;

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-export default function Countdown({ targetDate }) {
+const Countdown = ({ targetDate }) => {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft = {};
@@ -20,34 +21,51 @@ export default function Countdown({ targetDate }) {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const timerComponents = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    timerComponents.push(
-      <div key={interval} className="mx-2 text-center">
-        <div className="text-6xl font-bold">
-          {timeLeft[interval].toString().padStart(2, "0")}
-        </div>
-        <div className="text-sm">{interval}</div>
-      </div>
-    );
-  });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearTimeout(timer);
-  });
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  const timerComponents = Object.entries(timeLeft).map(([interval, value]) => (
+    <motion.div
+      key={interval}
+      className="flex flex-col items-center mx-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="flex items-center justify-center w-24 h-24 mb-2 border rounded-lg bg-green-900/30 border-green-500/30"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <span className="text-4xl font-bold text-green-400">
+          {value.toString().padStart(2, "0")}
+        </span>
+      </motion.div>
+      <span className="text-sm text-gray-400">{interval}</span>
+    </motion.div>
+  ));
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-wrap items-center justify-center">
       {timerComponents.length ? (
         timerComponents
       ) : (
-        <span>Event has started!</span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-2xl text-green-400"
+        >
+          Event has started!
+        </motion.span>
       )}
     </div>
   );
-}
+};
+
+export default Countdown;

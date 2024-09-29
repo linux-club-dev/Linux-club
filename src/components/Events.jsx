@@ -1,15 +1,19 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import Countdown from "@/components/Counttime";
 import Timeline from "@/components/Timeline";
 import LatestImages from "@/components/LatestEvent";
 
-export default function Events() {
+const Events = () => {
   const containerRef = useRef(null);
-  const [meshBackground, setMeshBackground] = useState(null);
+  const rendererRef = useRef(null);
+  const sceneRef = useRef(null);
+  const cameraRef = useRef(null);
+  const meshRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -18,7 +22,6 @@ export default function Events() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   useEffect(() => {
-    // Same mesh background as in Home component
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -27,8 +30,16 @@ export default function Events() {
       1000
     );
     const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+    sceneRef.current = scene;
+    cameraRef.current = camera;
+    rendererRef.current = renderer;
+
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById("mesh-background").appendChild(renderer.domElement);
+    const meshBgElement = document.getElementById("mesh-background");
+    if (meshBgElement) {
+      meshBgElement.appendChild(renderer.domElement);
+    }
 
     const geometry = new THREE.TorusKnotGeometry(5, 2, 90, 16);
     const material = new THREE.MeshBasicMaterial({
@@ -36,25 +47,49 @@ export default function Events() {
       wireframe: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
+    meshRef.current = mesh;
     scene.add(mesh);
 
     camera.position.z = 30;
 
     const animate = () => {
+      if (
+        meshRef.current &&
+        rendererRef.current &&
+        sceneRef.current &&
+        cameraRef.current
+      ) {
+        meshRef.current.rotation.x += 0.002;
+        meshRef.current.rotation.y += 0.003;
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+      }
       requestAnimationFrame(animate);
-      mesh.rotation.x += 0.002;
-      mesh.rotation.y += 0.003;
-      renderer.render(scene, camera);
     };
     animate();
 
-    setMeshBackground(renderer.domElement);
+    const handleResize = () => {
+      if (cameraRef.current && rendererRef.current) {
+        cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+        cameraRef.current.updateProjectionMatrix();
+        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      renderer.dispose();
-      document.getElementById("mesh-background");
-      if (renderer.domElement) {
-        renderer.domElement.remove();
+      window.removeEventListener("resize", handleResize);
+      if (
+        rendererRef.current &&
+        rendererRef.current.domElement &&
+        rendererRef.current.domElement.parentNode
+      ) {
+        rendererRef.current.domElement.parentNode.removeChild(
+          rendererRef.current.domElement
+        );
+      }
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
       }
     };
   }, []);
@@ -62,7 +97,7 @@ export default function Events() {
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden min-h-screen text-white bg-black"
+      className="min-h-screen overflow-hidden text-white bg-black"
     >
       <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
       <motion.div
@@ -81,8 +116,8 @@ export default function Events() {
         }}
       />
       <div className="relative z-30">
-        <section className="flex flex-col justify-center items-center min-h-screen">
-          <h1 className="mb-9 text-9xl font-bold text-emerald-400">
+        <section className="flex flex-col items-center justify-center min-h-screen">
+          <h1 className="text-3xl font-bold mb-9 sm:text-9xl text-emerald-400">
             Upcoming Event
           </h1>
           <Countdown targetDate="2024-12-31T23:59:59" />
@@ -92,4 +127,6 @@ export default function Events() {
       </div>
     </div>
   );
-}
+};
+
+export default Events;

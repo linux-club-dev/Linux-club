@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { Code, Users, Cpu, Globe } from "lucide-react";
@@ -31,12 +32,17 @@ const pastEvents = [
   {
     title: "Linux Install Fest",
     date: "2023-09-01",
-    image: "/images/event1.jpg",
+    image: "/images/TheEevent.jpeg",
   },
   {
     title: "Open Source Hackathon",
     date: "2023-10-15",
-    image: "/images/event2.jpg",
+    image: "/images/TheEventTwo.jpeg",
+  },
+  {
+    title: "Linux Meetup",
+    date: "2023-11-25",
+    image: "/images/TheEventThree.jpeg",
   },
 ];
 
@@ -61,10 +67,10 @@ export default function About() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="overflow-hidden relative px-4 py-20 bg-gradient-to-b from-black/50 to-green-900/30"
+      className="relative px-4 py-20 overflow-hidden bg-gradient-to-b from-black/50 to-green-900/30"
     >
       <div className="absolute inset-0 bg-gradient-to-b opacity-5 from-black/50 to-green-900/30"></div>
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +113,7 @@ export default function About() {
                   boxShadow: "0 0 20px rgba(0, 255, 0, 0.3)",
                 }}
               >
-                <feature.icon className="mx-auto mb-4 w-12 h-12 text-green-500" />
+                <feature.icon className="w-12 h-12 mx-auto mb-4 text-green-500" />
                 <h3 className="mb-2 text-xl font-semibold text-green-400">
                   {feature.title}
                 </h3>
@@ -120,29 +126,32 @@ export default function About() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="overflow-hidden relative p-6 rounded-lg shadow-lg backdrop-blur-sm bg-black/30 shadow-green-500/10"
+          className="relative p-6 overflow-hidden rounded-lg shadow-lg backdrop-blur-sm bg-black/30 shadow-green-500/10"
         >
           <h3 className="mb-6 text-2xl font-bold text-center text-green-400">
             Past Events
           </h3>
-          <div className="relative h-64">
+          <div className="relative h-64 overflow-hidden rounded-lg">
             <motion.div
               animate={controls}
-              className="flex absolute inset-0 justify-center items-center"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <Image
-                src={pastEvents[currentEvent].image}
-                alt={pastEvents[currentEvent].title}
-                width={600}
-                height={400}
-              />
-              <div className="absolute right-0 bottom-0 left-0 p-4 bg-gradient-to-t from-black to-transparent">
-                <h4 className="text-xl font-semibold text-white">
-                  {pastEvents[currentEvent].title}
-                </h4>
-                <p className="text-green-400">
-                  {pastEvents[currentEvent].date}
-                </p>
+              <div className="relative justify-center w-full h-full item-center ">
+                <Image
+                  src={pastEvents[currentEvent].image}
+                  alt={pastEvents[currentEvent].title}
+                  width={640}
+                  height={360}
+                  className="object-contain w-full h-full rounded-lg"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                  <h4 className="text-xl font-semibold text-white">
+                    {pastEvents[currentEvent].title}
+                  </h4>
+                  <p className="text-green-400">
+                    {pastEvents[currentEvent].date}
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>

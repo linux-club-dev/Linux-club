@@ -18,9 +18,9 @@ const CoreTeam = () => {
       name: "Pratik Mahalle",
       title: "Vice President",
       img: "/coreteam/pratik.jpeg", // Updated path
-      github: "https://github.com/pratikmahalle",
-      linkedin: "https://www.linkedin.com/in/pratikmahalle/",
-      twitter: "https://twitter.com/pratikmahalle",
+      github: "https://github.com/pratik-mahalle",
+      linkedin: "https://www.linkedin.com/in/mahalle-pratik/",
+      twitter: "https://x.com/PratikMahalle10",
     },
     {
       name: "Ghanshyam kadam",
@@ -42,8 +42,8 @@ const CoreTeam = () => {
       name: "Aniket jawalegekar",
       title: "Content Creator",
       img: "/coreteam/aniket.jpeg", // Updated path
-      github: "https://github.com/aniketjawalegekar",
-      linkedin: "https://www.linkedin.com/in/aniketjawalegekar/",
+      github: "https://github.com/aniketj14",
+      linkedin: "https://www.linkedin.com/in/aniket-jawalegekar/",
       twitter: "https://twitter.com/aniketjawalegekar",
     },
     {
@@ -99,17 +99,17 @@ const CoreTeam = () => {
         Meet Our Core Team
       </h2>
 
-      <div className="grid grid-cols-1 gap-8 w-full max-w-6xl md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         {teamMembers.map((member, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center p-6 rounded-lg shadow-lg backdrop-blur-sm transition-all duration-300 bg-black/30 hover:shadow-green-500/20 hover:bg-green-900/20"
+            className="flex flex-col items-center p-6 transition-all duration-300 rounded-lg shadow-lg backdrop-blur-sm bg-black/30 hover:shadow-green-500/20 hover:bg-green-900/20"
             whileHover={{ scale: 1.05 }}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <div className="overflow-hidden mb-4 w-32 h-32 rounded-full">
+            <div className="w-32 h-32 mb-4 overflow-hidden rounded-full">
               <Image
                 src={member.img}
                 alt={member.name}

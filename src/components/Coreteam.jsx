@@ -3,18 +3,6 @@ import Image from "next/image";
 
 const CoreTeam = () => {
   // Team members data
-  const teamMembers = [
-    { name: "Vrushali Kudande", title: "President", img: image },
-    { name: "John Doe", title: "Vice President", img: image },
-    { name: "Member 1", title: "Front-End Developer", img: image },
-    { name: "Member 2", title: "UI/UX Designer", img: image },
-    { name: "Member 3", title: "Marketing Specialist", img: image },
-    { name: "Member 4", title: "Backend Developer", img: image },
-    { name: "Member 5", title: "Security Specialist", img: image },
-    { name: "Member 6", title: "DevOps Engineer", img: image },
-    { name: "Member 7", title: "Security Specialist", img: image },
-    { name: "Member 8", title: "DevOps Engineer", img: image },
-  ];
 
   return (
     <div className="flex flex-col items-center px-4 py-10 my-6 bg-gradient-to-br">

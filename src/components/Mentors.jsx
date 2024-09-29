@@ -10,54 +10,67 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Github, Linkedin, Globe } from "lucide-react";
 
-const mentors = [
+export const mentors = [
   {
     id: 1,
     name: "Suyash Bhawsar",
-    position: "Senior Linux Kernel Developer",
+    position: "Founder of DevOps Dynamic Agency",
     image: "/mentors/suyash.jpeg",
-    bio: "With over 15 years of experience in Linux kernel development, Dr. Linux has contributed to numerous open-source projects and is a respected figure in the Linux community.",
-    expertise: ["Kernel Development", "Device Drivers", "System Performance"],
-    github: "https://github.com/drsarahlinux",
-    linkedin: "https://linkedin.com/in/drsarahlinux",
-    website: "https://sarahlinux.dev",
+    bio: "Suyash Bhawsar is the founder of DevOps Dynamic Agency on Upwork, specializing in DevOps and its associated tools. With extensive expertise in automation, CI/CD pipelines, cloud infrastructure management, and container orchestration, Suyash has successfully led numerous projects, helping businesses optimize their development workflows and scale their operations efficiently. His agency, known for its top-tier service and client satisfaction, has established itself as a trusted partner for companies looking to enhance their DevOps capabilities.",
+    expertise: [
+      "DevOps Engineering",
+      "CI/CD Pipeline Implementation",
+      "Cloud Infrastructure Management (AWS, Azure, GCP)",
+    ],
+    github: "https://github.com/suyashbhawsar",
+    linkedin: "https://linkedin.com/in/suyashbhawsar",
+    website: "https://devopsdynamic.agency",
   },
   {
     id: 2,
     name: "Shubham Khestre",
-    position: "Open Source Advocate & UI/UX Expert",
+    position: "Junior DevOps Engineer at FlairMinds",
     image: "/mentors/shubham.jpeg",
-    bio: "Prof. OpenSource has been at the forefront of open-source design tools for a decade, bridging the gap between beautiful design and open-source philosophy.",
-    expertise: ["UI/UX Design", "Open Source Tools", "Community Building"],
-    github: "https://github.com/alexopensource",
-    linkedin: "https://linkedin.com/in/alexopensource",
-    website: "https://alexopensource.com",
+    bio: "Shubham Khestre is a Junior DevOps Engineer at FlairMinds, specializing in optimizing and automating development processes. With a solid foundation in cloud infrastructure, continuous integration, and deployment, he plays a key role in streamlining workflows and enhancing system reliability. Passionate about technology and innovation, Shubham is dedicated to improving the efficiency and scalability of digital solutions.",
+    expertise: [
+      "DevOps",
+      "CI/CD",
+      "Infrastructure as Code",
+      "Docker",
+      "Kubernetes",
+    ],
+    github: "https://github.com/shubhamkhestre",
+    linkedin: "https://linkedin.com/in/shubhamkhestre",
+    website: "https://flairminds.com",
   },
   {
     id: 3,
     name: "Aditya Jadhav",
-    position: "CEO and Founder at MusiTech",
+    position: "Founder of MusiTech",
     image: "/mentors/adityaupdate.jpg",
-    bio: "Cmdr. Secure is a renowned expert in Linux system security, with a background in ethical hacking and secure system design.",
-    expertise: ["System Hardening", "Penetration Testing", "Security Audits"],
-    github: "https://github.com/cmdrmaxsecure",
-    linkedin: "https://linkedin.com/in/cmdrmaxsecure",
-    website: "https://linuxsecuritypro.com",
+    bio: "Aditya Jadhav is the Founder of MusiTech, leading a dynamic team committed to driving digital innovation and excellence. With expertise in digital marketing and content creation, Aditya combines a deep understanding of the digital landscape with a passion for creativity. His leadership ensures MusiTech remains at the forefront of industry trends, consistently delivering impactful and trend-setting digital solutions for clients.",
+    expertise: ["Digital Marketing", "Team Management", "Content Creation"],
+    github: "https://github.com/adityajadhav",
+    linkedin: "https://linkedin.com/in/adityajadhav",
+    website: "https://musitech.com",
   },
   {
     id: 4,
     name: "Raj Raut",
-    position: "DevOps Engineer",
+    position: "DevOps Engineer at DuploCloud",
     image: "/mentors/raj.jpeg",
-    bio: "Eng. DevOps is an expert in creating and managing Linux-based CI/CD pipelines, with a passion for automating everything.",
+    bio: "Raj Raut is a DevOps Engineer at DuploCloud, specializing in cloud technologies and infrastructure management. With a deep understanding of cloud platforms and services, he excels in designing and implementing scalable, secure, and efficient cloud solutions. Raj is adept at optimizing cloud resources, automating deployments, and ensuring high availability of applications. His expertise in cloud architecture and DevOps practices makes him a valuable asset in driving innovation and operational excellence.",
     expertise: [
-      "CI/CD Pipelines",
-      "Container Orchestration",
+      "Cloud Architecture",
       "Infrastructure as Code",
+      "AWS, GCP, Azure",
+      "Docker and Kubernetes",
+      "Monitoring and Logging",
+      "Ansible",
     ],
-    github: "https://github.com/tinadevops",
-    linkedin: "https://linkedin.com/in/tinadevops",
-    website: "https://devopswizard.tech",
+    github: "https://github.com/rajraut",
+    linkedin: "https://linkedin.com/in/rajraut",
+    website: "https://duplocloud.com",
   },
 ];
 
@@ -71,9 +84,9 @@ export default function Mentors() {
     >
       <div className="container px-4 mx-auto">
         <h2 className="mb-12 text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
-          Learn from the Best in Open Source
+          Learn from the our mentors
         </h2>
-        <p className="mx-auto mb-16 max-w-3xl text-xl text-center text-gray-300">
+        <p className="max-w-3xl mx-auto mb-16 text-xl text-center text-gray-300">
           Our mentors are industry leaders, passionate about sharing their
           knowledge and experience with the next generation of open-source
           enthusiasts.
@@ -106,13 +119,13 @@ export default function Mentors() {
           {mentors.map((mentor) => (
             <SwiperSlide key={mentor.id}>
               <motion.div
-                className="overflow-hidden rounded-lg shadow-lg backdrop-blur-sm transition-all duration-300 bg-black/30 hover:shadow-green-500/20 hover:bg-green-900/20"
+                className="overflow-hidden transition-all duration-300 rounded-lg shadow-lg backdrop-blur-sm bg-black/30 hover:shadow-green-500/20 hover:bg-green-900/20"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 0 25px rgba(0, 255, 0, 0.3)",
                 }}
               >
-                <div className="overflow-hidden relative h-64">
+                <div className="relative h-64 overflow-hidden">
                   <Image
                     src={mentor.image}
                     alt={mentor.name}
@@ -131,7 +144,7 @@ export default function Mentors() {
                     <h4 className="mb-2 text-lg font-semibold text-green-400">
                       Areas of Expertise:
                     </h4>
-                    <ul className="list-disc list-inside text-gray-300">
+                    <ul className="text-gray-300 list-disc list-inside">
                       {mentor.expertise.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}

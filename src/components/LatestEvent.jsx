@@ -6,16 +6,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const images = [
-  "/images/event1.jpg",
-  "/images/event2.jpg",
-  "/images/event3.jpg",
+  "/images/TheEevent.jpeg",
+  "/images/TheEventTwo.jpeg",
+  "/images/TheEventThree.jpeg",
+  ,
 ];
 
 export default function LatestImages() {
   return (
     <section className="py-20 bg-black">
       <h2 className="mb-12 text-4xl font-bold text-center">Latest Images</h2>
-      <div className="grid grid-cols-1 gap-6 mx-auto max-w-6xl md:grid-cols-3">
+      <div className="grid max-w-6xl grid-cols-1 gap-6 mx-auto md:grid-cols-3">
         {images.map((src, index) => (
           <motion.div
             key={index}

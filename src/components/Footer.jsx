@@ -1,7 +1,9 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Mail, Terminal } from "lucide-react";
+import Image from "next/image";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { InstagramLogoIcon } from "@radix-ui/react-icons";
 
@@ -10,51 +12,59 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      icon: Github,
+      icon: <Github className="w-5 h-5" />,
       path: "https://github.com/linux-club-dev",
       ariaLabel: "GitHub",
     },
     {
-      icon: Linkedin,
+      icon: <Linkedin className="w-5 h-5" />,
       path: "https://linkedin.com/company/thelinux-club",
       ariaLabel: "LinkedIn",
     },
     {
-      icon: Twitter,
+      icon: <Twitter className="w-5 h-5" />,
       path: "https://twitter.com/i/communities/1607126742795448320",
       ariaLabel: "Twitter",
     },
-    { icon: Mail, path: "mailto:linuxclub.pune@gmail.com", ariaLabel: "Email" },
     {
-      icon: InstagramLogoIcon,
-      path: "https://www.instargam.com/the_linux.club",
+      icon: <Mail className="w-5 h-5" />,
+      path: "mailto:linuxclub.pune@gmail.com",
+      ariaLabel: "Email",
+    },
+    {
+      icon: <InstagramLogoIcon className="w-5 h-5" />,
+      path: "https://www.instagram.com/the_linux.club",
       ariaLabel: "Instagram",
     },
   ];
 
   return (
-    <footer className="flex relative bottom-0 py-4 bg-black shadow-md">
-      <div className="px-8 mx-20 max-w-7xl sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+    <footer className="py-8 bg-black shadow-md">
+      <div className="container px-4 mx-auto">
+        <div className="flex flex-col items-center justify-between mb-8 md:flex-row">
           <motion.div
-            className="flex flex-col items-start"
+            className="flex flex-col items-center mb-6 md:items-start md:mb-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <Link href="/" className="flex items-center mb-2">
-              <Terminal className="mr-2 w-6 h-6 text-green-500" />
+              <Image
+                src="/images/logo.jpeg"
+                alt="Linux Club Logo"
+                width={24}
+                height={24}
+                className="mr-2 rounded-full"
+              />
               <span className="text-lg font-bold text-white">Linux Club</span>
             </Link>
-            <p className="text-xs text-center text-gray-400 md:text-left">
-              Empowering through open-source at Pune Edu Society&apos;s College
-              of Engineering.
+            <p className="max-w-xs text-sm text-center text-gray-400 md:text-left">
+              Where Innovation Meets Execution.
             </p>
           </motion.div>
 
-          {/* Social links */}
           <motion.div
-            className="flex flex-col items-end"
+            className="flex flex-col items-center md:items-end"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -70,18 +80,17 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.ariaLabel}
-                  className="text-gray-400 transition-colors duration-200 hover:text-green-500"
+                  className="text-gray-400 transition-colors duration-200 cursor-pointer hover:text-green-500"
                 >
-                  <link.icon className="w-5 h-5" />
+                  {link.icon}
                 </a>
               ))}
             </div>
           </motion.div>
         </div>
 
-        {/* Copyright */}
         <motion.div
-          className="pt-4 mt-6 text-xs text-center text-gray-500 border-t border-gray-800"
+          className="pt-4 text-xs text-center text-gray-500 border-t border-gray-800"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
