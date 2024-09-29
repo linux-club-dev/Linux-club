@@ -10,7 +10,7 @@ const CoreTeam = () => {
       name: "Vrushali Kudande",
       title: "President",
       img: "/coreteam/vrushali.jpg", // Updated path
-      github: "https://github.com/",
+      github: "https://github.com/vrushalikudande",
       linkedin: "https://www.linkedin.com/in/vrushalikudande/",
       twitter: "https://twitter.com/vrushalikudande",
     },
