@@ -41,7 +41,7 @@ export const mentors = [
     ],
     github: "https://github.com/shubhamkhestre",
     linkedin: "https://linkedin.com/in/shubhamkhestre",
-    website: "https://flairminds.com",
+    website: "https://shubhamkshetre.tech/",
   },
   {
     id: 3,
