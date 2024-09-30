@@ -43,11 +43,12 @@ const RecentBlogs = () => {
       desc: "https://techcrunch.com/wp-content/uploads/2024/09/gettyimages-1572935845-170667a.jpg",
     },
     {
-      title: "Blockchain Beyond Cryptocurrency",
+      title:
+        "YouTube blocks videos from Adele, Green Day, Bob Dylan, others in dispute with SESAC",
       author: "Michael Lee",
       date: "2024-09-15",
       content:
-        "YouTube blocks videos from Adele, Green Day, Bob Dylan, others in dispute with SESAC.",
+        "A number of YouTube videos featuring music from artists such as Adele, Green Day, Bob Dylan, Nirvana, and R.E.M. have been unplayable in the United States since Saturday.",
       categories: ["Content-Policy", "Media"],
       link: "https://techcrunch.com/2024/09/29/youtube-blocks-videos-from-adele-green-day-bob-dylan-others-in-dispute-with-sesac/",
       desc: "https://techcrunch.com/wp-content/uploads/2024/09/GettyImages-2164303808.jpg",
