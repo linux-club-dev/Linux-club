@@ -37,7 +37,7 @@ const NavBar = () => {
               <div className="hidden sm:block">
                 <div className="text-lg font-bold md:text-xl">Linux Club</div>
                 <div className="text-xs text-gray-400">
-                  PES&apos;s College of Engineering
+                  Learn Grow and Share !
                 </div>
               </div>
             </Link>
