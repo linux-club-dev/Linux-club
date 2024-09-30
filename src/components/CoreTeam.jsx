@@ -66,8 +66,8 @@ const CoreTeam = () => {
       name: "Arnav Kulkarni",
       title: "Event Coordinator",
       img: "/coreteam/arnav.jpeg", // Updated path
-      github: "https://github.com/arnavkulkarni",
-      linkedin: "https://www.linkedin.com/in/arnavkulkarni/",
+      github: "https://github.com/ArnavpK",
+      linkedin: "https://www.linkedin.com/in/arnav-kulkarni-84338b221",
       twitter: "https://twitter.com/arnavkulkarni",
     },
     {
@@ -85,6 +85,14 @@ const CoreTeam = () => {
       github: "http://github.com/prathamesh-pichkate",
       linkedin: " https://www.linkedin.com/in/prathamesh-pichkate1208",
       twitter: "https://x.com/Prathamesh_p128?t=2OVG1xZ_HdXLUCCKr6daig&s=09",
+    },
+    {
+      name: "Sairaj Jawalikar",
+      title: "Cybersecurity Lead",
+      img: "/coreteam/sairaj.jpeg",
+      github: "https://github.com/s41r4j",
+      linkedin: "https://in.linkedin.com/in/s41r4j/",
+      twitter: "https://twitter.com/s41r4j",
     },
   ];
 
