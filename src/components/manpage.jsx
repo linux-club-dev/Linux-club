@@ -76,7 +76,7 @@ const commands = [
 
 const TuxMascot = () => (
   <motion.div
-    className="fixed bottom-4 right-4 w-16 h-16"
+    className="fixed w-16 h-16 bottom-4 right-4"
     animate={{
       y: [0, -10, 0],
     }}
@@ -102,7 +102,7 @@ const TuxMascot = () => (
 );
 
 const FeatureCard = ({ icon, title, description }) => (
-  <Card className="bg-black/50 border-green-500/50 hover:border-green-500 transition-colors duration-300">
+  <Card className="transition-colors duration-300 bg-black/50 border-green-500/50 hover:border-green-500">
     <CardHeader>
       <div className="flex items-center space-x-2">
         {icon}
@@ -123,7 +123,7 @@ const CommandCard = ({ cmd }) => {
   useEffect(() => {
     const timer = setTimeout(
       () => setIsLoading(false),
-      Math.random() * 1000 + 500,
+      Math.random() * 1000 + 500
     );
     return () => clearTimeout(timer);
   }, []);
@@ -152,7 +152,7 @@ const CommandCard = ({ cmd }) => {
   }
 
   return (
-    <Card className="bg-black/50 border-green-500/50 hover:border-green-500 transition-colors duration-300">
+    <Card className="transition-colors duration-300 bg-black/50 border-green-500/50 hover:border-green-500">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <h3 className="text-lg font-semibold text-green-400">{cmd.name}</h3>
         <Button
@@ -162,9 +162,9 @@ const CommandCard = ({ cmd }) => {
           className="text-green-500 hover:text-green-400 hover:bg-green-900/50"
         >
           {isCopied ? (
-            <Check className="h-4 w-4" />
+            <Check className="w-4 h-4" />
           ) : (
-            <Copy className="h-4 w-4" />
+            <Copy className="w-4 h-4" />
           )}
         </Button>
       </CardHeader>
@@ -208,9 +208,9 @@ const InteractiveTerminal = () => {
   };
 
   return (
-    <Card className="bg-black/50 border-green-500/50 mt-4">
+    <Card className="mt-4 bg-black/50 border-green-500/50">
       <CardContent className="p-4">
-        <div className="font-mono text-green-400 text-sm h-40 overflow-y-auto mb-2">
+        <div className="h-40 mb-2 overflow-y-auto font-mono text-sm text-green-400">
           {output.map((line, index) => (
             <div key={index}>{line}</div>
           ))}
@@ -220,7 +220,7 @@ const InteractiveTerminal = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="bg-black/50 text-green-400 border-green-500/50"
+            className="text-green-400 bg-black/50 border-green-500/50"
             placeholder="Type a command..."
           />
           <Button type="submit" className="ml-2">
@@ -234,12 +234,12 @@ const InteractiveTerminal = () => {
 
 export default function Manpage() {
   return (
-    <div className="bg-gradient-to-b from-black to-green-900/30 text-green-300 min-h-screen  p-6 text-center ">
+    <div className="min-h-screen p-6 text-center text-green-300 bg-gradient-to-b from-black to-green-900/30 ">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-4xl font-bold text-green-400 mb-6"
+        className="mb-6 text-4xl font-bold text-green-400"
       >
         Linux Manual
       </motion.h1>
@@ -277,16 +277,16 @@ export default function Manpage() {
             className="space-y-8"
           >
             <div className="text-center">
-              <h2 className="text-3xl font-semibold text-green-400 mb-4">
+              <h2 className="mb-4 text-3xl font-semibold text-green-400">
                 Welcome to the World of Linux!
               </h2>
-              <p className="text-xl text-green-300 max-w-3xl mx-auto">
+              <p className="max-w-3xl mx-auto text-xl text-green-300">
                 Discover the power, flexibility, and freedom of the open-source
-                operating system that runs the world's technology.
+                operating system that runs the world&apos;s technology.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3">
               <FeatureCard
                 icon={<BookOpen className="w-12 h-12 text-green-500" />}
                 title="Open Source"
@@ -304,16 +304,17 @@ export default function Manpage() {
               />
             </div>
 
-            <Card className="bg-green-900/50 border-green-500/50 mt-8">
+            <Card className="mt-8 bg-green-900/50 border-green-500/50">
               <CardHeader>
                 <h3 className="text-2xl font-semibold text-green-300">
                   Did You Know?
                 </h3>
               </CardHeader>
               <CardContent>
-                <ul className="list-disc list-inside space-y-2 text-green-200">
+                <ul className="space-y-2 text-green-200 list-disc list-inside">
                   <li>
-                    Linux powers 96.3% of the world's top 1 million servers.
+                    Linux powers 96.3% of the world&apos;s top 1 million
+                    servers.
                   </li>
                   <li>
                     Android, which runs on Linux, is the most popular mobile
@@ -340,7 +341,7 @@ export default function Manpage() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <h2 className="text-3xl font-semibold text-green-400 mb-4">
+            <h2 className="mb-4 text-3xl font-semibold text-green-400">
               Master the Terminal
             </h2>
             <p className="text-xl text-green-300">
@@ -351,7 +352,7 @@ export default function Manpage() {
 
             <InteractiveTerminal />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
               <Card className="bg-black/50 border-green-500/50">
                 <CardHeader>
                   <h3 className="text-xl font-semibold text-green-400">
@@ -359,7 +360,7 @@ export default function Manpage() {
                   </h3>
                 </CardHeader>
                 <CardContent>
-                  <ul className="list-disc list-inside space-y-2 text-green-300">
+                  <ul className="space-y-2 text-green-300 list-disc list-inside">
                     <li>Commands are case-sensitive</li>
                     <li>Use Tab for auto-completion</li>
                     <li>Ctrl+C interrupts a running command</li>
@@ -374,7 +375,7 @@ export default function Manpage() {
                   </h3>
                 </CardHeader>
                 <CardContent>
-                  <ul className="list-disc list-inside space-y-2 text-green-300">
+                  <ul className="space-y-2 text-green-300 list-disc list-inside">
                     <li>nano or vim for text editing</li>
                     <li>top or htop for system monitoring</li>
                     <li>wget for downloading files</li>
@@ -384,19 +385,19 @@ export default function Manpage() {
               </Card>
             </div>
 
-            <Card className="bg-green-900/50 border-green-500/50 mt-8">
+            <Card className="mt-8 bg-green-900/50 border-green-500/50">
               <CardHeader>
                 <h3 className="text-2xl font-semibold text-green-300">
                   Pro Tip
                 </h3>
               </CardHeader>
               <CardContent>
-                <p className="text-green-200 mb-2">
+                <p className="mb-2 text-green-200">
                   Create aliases for your most-used commands to save time. Add
                   them to your ~/.bashrc file:
                 </p>
-                <pre className="bg-black/50 p-2 rounded text-green-400 border border-green-500/50">
-                  alias update='sudo apt update && sudo apt upgrade'
+                <pre className="p-2 text-green-400 border rounded bg-black/50 border-green-500/50">
+                  alias update=&apos;sudo apt update && sudo apt upgrade&apos;
                 </pre>
               </CardContent>
             </Card>
@@ -413,11 +414,11 @@ export default function Manpage() {
             <h2 className="text-2xl font-semibold text-green-400">
               Essential Linux Commands
             </h2>
-            <p className="text-green-300 mb-6">
+            <p className="mb-6 text-green-300">
               Master these commands to navigate and control your Linux system
               efficiently.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {commands.map((cmd) => (
                 <CommandCard key={cmd.name} cmd={cmd} />
               ))}
@@ -434,7 +435,7 @@ export default function Manpage() {
       >
         <Button variant="link" className="text-green-500 hover:text-green-400">
           Explore more Linux resources
-          <ArrowRight className="ml-2 w-5 h-5" />
+          <ArrowRight className="w-5 h-5 ml-2" />
         </Button>
       </motion.div>
 
