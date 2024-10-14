@@ -7,7 +7,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import RecentBlogs from "@/components/RecentBlogs";
 import Activities from "@/components/Activities";
-
+import Animation from "@/components/Animation";
 const Home = () => {
   const containerRef = useRef(null);
   const rendererRef = useRef(null);
@@ -119,6 +119,7 @@ const Home = () => {
       <div className="relative z-30">
         <Hero />
         <About />
+
         <Activities />
         <RecentBlogs />
       </div>
