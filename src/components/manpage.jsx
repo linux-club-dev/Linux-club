@@ -72,6 +72,108 @@ const commands = [
     usage: "Package management utility",
   },
   { name: "man", fullForm: "Manual", usage: "Display system manual pages" },
+
+  {
+    name: "echo",
+    fullForm: "Echo",
+    usage: "Display a line of text or output variables",
+  },
+  {
+    name: "df",
+    fullForm: "Disk Filesystem",
+    usage: "Show disk space usage of file systems",
+  },
+  {
+    name: "du",
+    fullForm: "Disk Usage",
+    usage: "Estimate file space usage",
+  },
+  {
+    name: "top",
+    fullForm: "Top Processes",
+    usage: "Display real-time system resource usage and running processes",
+  },
+  {
+    name: "ps",
+    fullForm: "Process Status",
+    usage: "Display information about active processes",
+  },
+  {
+    name: "kill",
+    fullForm: "Kill Process",
+    usage: "Terminate processes by their process ID (PID)",
+  },
+  {
+    name: "whoami",
+    fullForm: "Who Am I",
+    usage: "Display the current username",
+  },
+  {
+    name: "hostname",
+    fullForm: "Hostname",
+    usage: "Show or set the system's hostname",
+  },
+  {
+    name: "wget",
+    fullForm: "Web Get",
+    usage: "Download files from the web",
+  },
+  {
+    name: "curl",
+    fullForm: "Client URL",
+    usage: "Transfer data from or to a server (supports various protocols)",
+  },
+  {
+    name: "uname",
+    fullForm: "Unix Name",
+    usage: "Show system information",
+  },
+  {
+    name: "date",
+    fullForm: "Date",
+    usage: "Display or set the system date and time",
+  },
+  {
+    name: "uptime",
+    fullForm: "Uptime",
+    usage: "Display how long the system has been running",
+  },
+  {
+    name: "history",
+    fullForm: "History",
+    usage: "Show a list of previously executed commands",
+  },
+  {
+    name: "ping",
+    fullForm: "Packet Internet Groper",
+    usage: "Send ICMP echo requests to test network connectivity",
+  },
+  {
+    name: "ifconfig",
+    fullForm: "Interface Config",
+    usage: "Configure or display network interface parameters",
+  },
+  {
+    name: "ip",
+    fullForm: "Internet Protocol",
+    usage:
+      "Show or configure networking, routing, devices, interfaces, and tunnels",
+  },
+  {
+    name: "ssh",
+    fullForm: "Secure Shell",
+    usage: "Connect to a remote machine securely via SSH",
+  },
+  {
+    name: "scp",
+    fullForm: "Secure Copy",
+    usage: "Securely copy files between systems",
+  },
+  {
+    name: "tar",
+    fullForm: "Tape Archive",
+    usage: "Archive files and directories into a single file or extract them",
+  },
 ];
 
 const TuxMascot = () => (
@@ -123,7 +225,7 @@ const CommandCard = ({ cmd }) => {
   useEffect(() => {
     const timer = setTimeout(
       () => setIsLoading(false),
-      Math.random() * 1000 + 500
+      Math.random() * 1000 + 500,
     );
     return () => clearTimeout(timer);
   }, []);
