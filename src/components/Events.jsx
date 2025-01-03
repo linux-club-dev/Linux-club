@@ -1,11 +1,12 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
-import Countdown from "@/components/Counttime";
 import Timeline from "@/components/Timeline";
+import Countdown from "@/components/Counttime";
 import LatestImages from "@/components/LatestEvent";
+import axios from "axios";
 
 const Events = () => {
   const containerRef = useRef(null);
@@ -13,6 +14,9 @@ const Events = () => {
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
   const meshRef = useRef(null);
+  const [targetDate, setTargetDate] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,6 +25,80 @@ const Events = () => {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
+  // Helper function to convert DD-MM-YYYY to a valid date string
+  const convertToValidDateString = (dateStr, timeStr) => {
+    try {
+      const [day, month, year] = dateStr.trim().split("-");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")} ${
+        timeStr || "00:00:00"
+      }`;
+    } catch (error) {
+      console.error("Date parsing error:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchLatestEvent = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/api/admin/events");
+        const events = response.data.events;
+
+        // Get current timestamp
+        const now = new Date().getTime();
+
+        // Filter future events only and sort by nearest
+        const futureEvents = events
+          .filter((event) => {
+            const dateString = convertToValidDateString(
+              event.EventDate,
+              event.EventTime
+            );
+            if (!dateString) return false;
+
+            const eventTimestamp = new Date(dateString).getTime();
+            return !isNaN(eventTimestamp) && eventTimestamp > now;
+          })
+          .sort((a, b) => {
+            const dateStringA = convertToValidDateString(
+              a.EventDate,
+              a.EventTime
+            );
+            const dateStringB = convertToValidDateString(
+              b.EventDate,
+              b.EventTime
+            );
+            return (
+              new Date(dateStringA).getTime() - new Date(dateStringB).getTime()
+            );
+          });
+
+        if (futureEvents.length > 0) {
+          const nextEvent = futureEvents[0];
+          const fullDateString = convertToValidDateString(
+            nextEvent.EventDate,
+            nextEvent.EventTime
+          );
+
+          if (fullDateString) {
+            setTargetDate(fullDateString);
+          } else {
+            setError("Invalid date format in event data");
+          }
+        } else {
+          setTargetDate(null);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatestEvent();
+  }, []);
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -120,7 +198,13 @@ const Events = () => {
           <h1 className="text-3xl font-bold mb-9 sm:text-9xl text-emerald-400">
             Upcoming Event
           </h1>
-          <Countdown targetDate="2024-12-31T23:59:59" />
+          {loading ? (
+            <div className="text-2xl text-green-400">Loading...</div>
+          ) : error ? (
+            <div className="text-2xl text-red-400">Error: {error}</div>
+          ) : (
+            <Countdown targetDate={targetDate} />
+          )}
         </section>
         <Timeline />
         <LatestImages />
