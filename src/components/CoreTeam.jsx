@@ -1,157 +1,100 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Instagram } from "lucide-react"; // Assuming you're using lucide-react for Instagram icons
 import Image from "next/image";
 
 const CoreTeam = () => {
-  const teamMembers = [
-    {
-      name: "Vrushali Kudande",
-      title: "President",
-      img: "/coreteam/vrushali.jpg", // Updated path
-      github: "https://github.com/vrushalikudande",
-      linkedin: "https://www.linkedin.com/in/vrushalikudande/",
-      twitter: "https://twitter.com/vrushalikudande",
-    },
-    {
-      name: "Pratik Mahalle",
-      title: "Vice President",
-      img: "/coreteam/pratik.jpeg", // Updated path
-      github: "https://github.com/pratik-mahalle",
-      linkedin: "https://www.linkedin.com/in/mahalle-pratik/",
-      twitter: "https://x.com/PratikMahalle10",
-    },
-    {
-      name: "Ghanshyam kadam",
-      title: "Secretary",
-      img: "/coreteam/ghanshyam.jpeg", // Updated path
-      github: "https://github.com/GhanashyamKadam",
-      linkedin: " https://www.linkedin.com/in/ghanashyamkadam/",
-      twitter: "https://x.com/Ghanashyam3f4",
-    },
-    {
-      name: "Sourav Thakur",
-      title: "Designer",
-      img: "/coreteam/sourav.jpg", // Updated path
-      github: "https://github.com/souravthakur",
-      linkedin: "https://www.linkedin.com/in/souravthakur/",
-      twitter: "https://twitter.com/souravthakur",
-    },
-    {
-      name: "Aniket jawalegekar",
-      title: "Content Creator",
-      img: "/coreteam/aniket.jpeg", // Updated path
-      github: "https://github.com/aniketj14",
-      linkedin: "https://www.linkedin.com/in/aniket-jawalegekar/",
-      twitter: "https://twitter.com/aniketjawalegekar",
-    },
-    {
-      name: "Abhishek Katale",
-      title: "Data Science Lead",
-      img: "/coreteam/abhishekKatale.jpeg", // Updated path
-      github: "https://github.com/Abhishekkatale",
-      linkedin: " https://www.linkedin.com/in/abhishek-katale/",
-      twitter: "https://x.com/AbhishekKatale2",
-    },
-    {
-      name: "Sakshi Jadhav",
-      title: "Membership Admin",
-      img: "/coreteam/sakshi.jpeg", // Updated path
-      github: "https://github.com/sakshijadhav",
-      linkedin: "https://www.linkedin.com/in/sakshijadhav/",
-      twitter: "https://twitter.com/sakshijadhav",
-    },
-    {
-      name: "Arnav Kulkarni",
-      title: "Event Coordinator",
-      img: "/coreteam/arnav.jpeg", // Updated path
-      github: "https://github.com/ArnavpK",
-      linkedin: "https://www.linkedin.com/in/arnav-kulkarni-84338b221",
-      twitter: "https://twitter.com/arnavkulkarni",
-    },
-    {
-      name: "Abhishek Kaware",
-      title: " Co-Event Coordinator",
-      img: "/coreteam/abhishekKaware.jpeg", // Updated path
-      github: "https://github.com/abhishekkaware",
-      linkedin: "https://www.linkedin.com/in/abhishekkaware/",
-      twitter: "https://twitter.com/abhishekkaware",
-    },
-    {
-      name: "Prathmesh Pichkate",
-      title: "Archivist",
-      img: "/coreteam/prathmesh.jpeg",
-      github: "http://github.com/prathamesh-pichkate",
-      linkedin: " https://www.linkedin.com/in/prathamesh-pichkate1208",
-      twitter: "https://x.com/Prathamesh_p128?t=2OVG1xZ_HdXLUCCKr6daig&s=09",
-    },
-    {
-      name: "Sairaj Jawalikar",
-      title: "Cybersecurity Lead",
-      img: "/coreteam/sairaj.jpeg",
-      github: "https://github.com/s41r4j",
-      linkedin: "https://in.linkedin.com/in/s41r4j/",
-      twitter: "https://twitter.com/s41r4j",
-    },
-  ];
+  // Team members data
 
   return (
-    <motion.div
-      className="flex flex-col items-center px-4 py-20 bg-gradient-to-b from-black to-green-900/30"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <h2 className="mb-12 text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
+    <div className="flex flex-col items-center px-4 py-10 my-6 bg-gradient-to-br">
+      {/* Main title */}
+      <h1 className="mb-12 text-4xl font-bold text-center text-white md:text-6xl">
         Meet Our Core Team
-      </h2>
+      </h1>
 
-      <div className="grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-        {teamMembers.map((member, index) => (
-          <motion.div
+      {/* President & Vice President Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10 lg:w-[80vh] max-w-6xl">
+        {teamMembers.slice(0, 2).map((member, index) => (
+          <div
             key={index}
-            className="flex flex-col items-center p-6 transition-all duration-300 rounded-lg shadow-lg backdrop-blur-sm bg-black/30 hover:shadow-green-500/20 hover:bg-green-900/20"
-            whileHover={{ scale: 1.05 }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="flex relative flex-col items-center p-6 text-white bg-transparent rounded-lg shadow-lg transition-transform transform hover:scale-105 shadow-cyan-500/50 hover:bg-slate-900 group"
           >
-            <div className="w-32 h-32 mb-4 overflow-hidden rounded-full">
+            {/* Image Section */}
+            <div className="overflow-hidden w-24 h-24 rounded-full border md:w-48 md:h-48">
               <Image
                 src={member.img}
                 alt={member.name}
-                width={128}
-                height={128}
-                className="object-cover"
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
               />
             </div>
-            <h3 className="text-xl font-bold text-green-400">{member.name}</h3>
-            <p className="mb-4 text-gray-400">{member.title}</p>
-            <div className="flex space-x-4">
-              <a
-                href={member.github}
-                className="text-gray-400 transition-colors hover:text-green-400"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href={member.linkedin}
-                className="text-gray-400 transition-colors hover:text-green-400"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href={member.twitter}
-                className="text-gray-400 transition-colors hover:text-green-400"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
+
+            {/* Content that is always visible */}
+            <div className="flex flex-col items-center mt-6">
+              <h3 className="text-xl italic font-bold md:text-2xl">
+                {member.title}
+              </h3>
+              <h2 className="text-2xl font-semibold md:text-4xl">
+                {member.name}
+              </h2>
+              <div className="flex justify-center mt-4 space-x-4">
+                <a href="#" className="text-blue-500">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+                <a href="#" className="text-blue-500">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+                <a href="#" className="text-blue-500">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+              </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+
+      {/* Other Team Members Row */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-10 w-full lg:w-[75%]">
+        {teamMembers.slice(2).map((member, index) => (
+          <div
+            key={index}
+            className="flex relative flex-col items-center p-6 text-white bg-transparent rounded-lg shadow-lg transition-transform transform hover:scale-105 shadow-cyan-500/50 hover:bg-slate-700 group"
+          >
+            {/* Image Section */}
+            <div className="overflow-hidden w-24 h-24 rounded-full border md:w-32 md:h-32">
+              <Image
+                src={member.img}
+                alt={member.name}
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
+              />
+            </div>
+
+            {/* Content that is always visible */}
+            <div className="flex flex-col items-center mt-2 text-center md:mt-4">
+              <h3 className="text-sm italic font-bold tracking-tight md:text-lg">
+                {member.title}
+              </h3>
+              <h2 className="text-xl font-semibold tracking-tight md:text-2xl">
+                {member.name}
+              </h2>
+              <div className="flex justify-center mt-4 space-x-4">
+                <a href="#" className="text-blue-500 hover:text-blue-700">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+                <a href="#" className="text-blue-500 hover:text-blue-700">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+                <a href="#" className="text-blue-500 hover:text-blue-700">
+                  <Instagram className="w-4 h-4 md:h-6 md:w-6" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
