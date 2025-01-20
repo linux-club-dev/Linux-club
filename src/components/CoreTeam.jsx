@@ -2,7 +2,49 @@ import { Instagram } from "lucide-react"; // Assuming you're using lucide-react 
 import Image from "next/image";
 
 const CoreTeam = () => {
-  // Team members data
+  // Array of team members
+  const teamMembers = [
+    {
+      name: "Carol Williams",
+      title: "Project Manager",
+      img: "/images/coreTeam/carol.jpg",
+    },
+    {
+      name: "David Brown",
+      title: "UI/UX Designer",
+      img: "/images/coreTeam/david.jpg",
+    },
+    {
+      name: "Eve Davis",
+      title: "Frontend Developer",
+      img: "/images/coreTeam/eve.jpg",
+    },
+    {
+      name: "Frank Miller",
+      title: "Backend Developer",
+      img: "/images/coreTeam/frank.jpg",
+    },
+    {
+      name: "Grace Wilson",
+      title: "Data Scientist",
+      img: "/images/coreTeam/grace.jpg",
+    },
+    {
+      name: "Henry Thompson",
+      title: "DevOps Engineer",
+      img: "/images/coreTeam/henry.jpg",
+    },
+    {
+      name: "Ivy White",
+      title: "Machine Learning Engineer",
+      img: "/images/coreTeam/ivy.jpg",
+    },
+    {
+      name: "Jack Green",
+      title: "Cybersecurity Analyst",
+      img: "/images/coreTeam/jack.jpg",
+    },
+  ];
 
   return (
     <div className="flex flex-col items-center px-4 py-10 my-6 bg-gradient-to-br">
@@ -16,10 +58,10 @@ const CoreTeam = () => {
         {teamMembers.slice(0, 2).map((member, index) => (
           <div
             key={index}
-            className="flex relative flex-col items-center p-6 text-white bg-transparent rounded-lg shadow-lg transition-transform transform hover:scale-105 shadow-cyan-500/50 hover:bg-slate-900 group"
+            className="relative flex flex-col items-center p-6 text-white transition-transform transform bg-transparent rounded-lg shadow-lg hover:scale-105 shadow-cyan-500/50 hover:bg-slate-900 group"
           >
             {/* Image Section */}
-            <div className="overflow-hidden w-24 h-24 rounded-full border md:w-48 md:h-48">
+            <div className="w-24 h-24 overflow-hidden border rounded-full md:w-48 md:h-48">
               <Image
                 src={member.img}
                 alt={member.name}
@@ -58,10 +100,10 @@ const CoreTeam = () => {
         {teamMembers.slice(2).map((member, index) => (
           <div
             key={index}
-            className="flex relative flex-col items-center p-6 text-white bg-transparent rounded-lg shadow-lg transition-transform transform hover:scale-105 shadow-cyan-500/50 hover:bg-slate-700 group"
+            className="relative flex flex-col items-center p-6 text-white transition-transform transform bg-transparent rounded-lg shadow-lg hover:scale-105 shadow-cyan-500/50 hover:bg-slate-700 group"
           >
             {/* Image Section */}
-            <div className="overflow-hidden w-24 h-24 rounded-full border md:w-32 md:h-32">
+            <div className="w-24 h-24 overflow-hidden border rounded-full md:w-32 md:h-32">
               <Image
                 src={member.img}
                 alt={member.name}
