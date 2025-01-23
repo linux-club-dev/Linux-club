@@ -42,7 +42,68 @@ export const images = [
   },
 ];
 // data/teamData.js
-
+export const teamMembers = [
+  {
+    name: "Carol Williams",
+    title: "Project Manager",
+    img: "arnav.jpg",
+  },
+  {
+    name: "David Brown",
+    title: "UI/UX Designer",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Eve Davis",
+    title: "Frontend Developer",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Frank Miller",
+    title: "Backend Developer",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Grace Wilson",
+    title: "Data Scientist",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Henry Thompson",
+    title: "DevOps Engineer",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Ivy White",
+    title: "Quality Assurance",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Jack Green",
+    title: "Technical Writer",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Liam Black",
+    title: "Support Specialist",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Mia Blue",
+    title: "Community Manager",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Noah Red",
+    title: "Security Analyst",
+    img: "arnav.jpeg",
+  },
+  {
+    name: "Olivia Yellow",
+    title: "Marketing Specialist",
+    img: "arnav.jpeg",
+  },
+];
 export const mentors = [
   {
     id: 1,
