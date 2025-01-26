@@ -7,7 +7,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import RecentBlogs from "@/components/RecentBlogs";
 import Activities from "@/components/Activities";
-import Animation from "@/components/Animation";
+
 const Home = () => {
   const containerRef = useRef(null);
   const rendererRef = useRef(null);
@@ -25,10 +25,10 @@ const Home = () => {
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      45,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      1500
     );
     const renderer = new THREE.WebGLRenderer({ alpha: true });
 
@@ -46,12 +46,14 @@ const Home = () => {
     const material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       wireframe: true,
+      vertexColors: true,
+      transparent: true,
     });
     const mesh = new THREE.Mesh(geometry, material);
     meshRef.current = mesh;
     scene.add(mesh);
 
-    camera.position.z = 10;
+    camera.position.z = 20;
 
     const animate = () => {
       if (
@@ -60,8 +62,8 @@ const Home = () => {
         sceneRef.current &&
         cameraRef.current
       ) {
-        meshRef.current.rotation.x += 0.001;
-        meshRef.current.rotation.y += 0.001;
+        meshRef.current.rotation.x += 0.005;
+        meshRef.current.rotation.y += 0.005;
         rendererRef.current.render(sceneRef.current, cameraRef.current);
       }
       requestAnimationFrame(animate);
@@ -101,14 +103,7 @@ const Home = () => {
       className="min-h-screen overflow-hidden text-white bg-black"
     >
       <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
-      <motion.div
-        className="fixed inset-0 z-10 pointer-events-none"
-        style={{
-          backgroundImage: 'url("/circuit-board.svg")',
-          backgroundSize: "cover",
-          y: backgroundY,
-        }}
-      />
+      <motion.div className="fixed inset-0 z-10 pointer-events-none" />
       <motion.div
         className="absolute inset-0 z-20 pointer-events-none"
         style={{

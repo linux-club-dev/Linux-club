@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import CoreTeam from "@/components/CoreTeam";
 import Head from "next/head";
@@ -12,7 +12,6 @@ const Teams = () => {
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
   const meshRef = useRef(null);
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -44,6 +43,8 @@ const Teams = () => {
     const material = new THREE.MeshBasicMaterial({
       color: 0x00ffff,
       wireframe: true,
+      transparent: true,
+      opacity: 0.6,
     });
     const mesh = new THREE.Mesh(geometry, material);
     meshRef.current = mesh;
@@ -96,44 +97,57 @@ const Teams = () => {
   return (
     <>
       <Head>
-        <title>Teams | MyWebsite</title>
+        <title>Our Team | Linux Club</title>
         <meta
           name="description"
-          content="Meet our mentors and core team members."
+          content="Meet our passionate team of developers, students, and tech enthusiasts."
         />
       </Head>
       <div
         ref={containerRef}
-        className="min-h-screen overflow-hidden text-white bg-black"
+        className="relative min-h-screen overflow-hidden text-white bg-gradient-to-b from-black via-gray-900 to-black"
       >
-        <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
+        <div id="mesh-background" className="fixed inset-0 z-0 opacity-30" />
+
         <motion.div
-          className="fixed inset-0 z-10 pointer-events-none"
-          style={{
-            backgroundImage: 'url("/circuit-board.svg")',
-            backgroundSize: "cover",
-            y: backgroundY,
-          }}
-        />
-        <motion.div
-          className="absolute inset-0 z-20 pointer-events-none"
+          className="fixed inset-0 z-10 pointer-events-none bg-gradient-radial"
           style={{
             background:
-              "radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,0,0,0.8) 30%)",
+              "radial-gradient(circle at center, rgba(0,255,255,0.15) 0%, rgba(0,0,0,0.9) 40%)",
           }}
         />
+
         <div className="relative z-30">
-          <section className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="gap-2 mb-10 text-6xl font-bold tracking-wide text-transparent bg-gradient-to-tl from-black/60 to-slate-50 bg-clip-text motion-preset-bounce">
-              <span>Students |&&|</span>
-              <span> Devs |&&| </span>
-              <span>Nerds.</span>
-            </h1>
-            <p className="text-xl text-gray-300 motion-preset-slide-up-left-lg">
-              we do things that we love and now help others to do the same.
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="flex flex-col items-center justify-center min-h-screen px-4 space-y-8"
+          >
+            <motion.h1
+              className="text-5xl font-bold leading-tight text-center md:text-7xl motion-preset-slide-up-right-md"
+              style={{
+                background: "linear-gradient(to right, #fff, #00ffff)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Students && Devs && Nerds
+            </motion.h1>
+            <p className="text-lg text-center md:text-xl motion-preset-slide-up-right-md">
+              Empowering the next generation of open source contributors
             </p>
-          </section>
-          <CoreTeam />
+          </motion.section>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="px-4 py-20 md:px-8"
+          >
+            <CoreTeam />
+          </motion.div>
         </div>
       </div>
     </>

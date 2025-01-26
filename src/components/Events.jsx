@@ -178,14 +178,7 @@ const Events = () => {
       className="min-h-screen overflow-hidden text-white bg-black"
     >
       <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
-      <motion.div
-        className="fixed inset-0 z-10 pointer-events-none"
-        style={{
-          backgroundImage: 'url("/circuit-board.svg")',
-          backgroundSize: "cover",
-          y: backgroundY,
-        }}
-      />
+      <motion.div className="fixed inset-0 z-10 pointer-events-none" />
       <motion.div
         className="absolute inset-0 z-20 pointer-events-none"
         style={{

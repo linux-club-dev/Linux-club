@@ -41,7 +41,6 @@ export const images = [
     alt: "Event 3",
   },
 ];
-// data/teamData.js
 export const teamMembers = [
   {
     name: "Arnav Kulkarni",
