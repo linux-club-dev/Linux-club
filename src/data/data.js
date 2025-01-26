@@ -44,52 +44,52 @@ export const images = [
 // data/teamData.js
 export const teamMembers = [
   {
-    name: "Carol Williams",
+    name: "Arnav Kulkarni",
     title: "Project Manager",
-    img: "arnav.jpg",
+    img: "arnav.jpeg",
   },
   {
-    name: "David Brown",
+    name: "Arnav Kulkarni",
     title: "UI/UX Designer",
     img: "arnav.jpeg",
   },
   {
-    name: "Eve Davis",
+    name: "Arnav Kulkarni",
     title: "Frontend Developer",
     img: "arnav.jpeg",
   },
   {
-    name: "Frank Miller",
+    name: "Arnav Kulkarni",
     title: "Backend Developer",
     img: "arnav.jpeg",
   },
   {
-    name: "Grace Wilson",
+    name: "Arnav Kulkarni",
     title: "Data Scientist",
     img: "arnav.jpeg",
   },
   {
-    name: "Henry Thompson",
+    name: "Arnav Kulkarni",
     title: "DevOps Engineer",
     img: "arnav.jpeg",
   },
   {
-    name: "Ivy White",
+    name: "Arnav Kulkarni",
     title: "Quality Assurance",
     img: "arnav.jpeg",
   },
   {
-    name: "Jack Green",
+    name: "Arnav Kulkarni",
     title: "Technical Writer",
     img: "arnav.jpeg",
   },
   {
-    name: "Liam Black",
+    name: "Arnav Kulkarni",
     title: "Support Specialist",
     img: "arnav.jpeg",
   },
   {
-    name: "Mia Blue",
+    name: "Arnav Kulkarni",
     title: "Community Manager",
     img: "arnav.jpeg",
   },
@@ -99,7 +99,7 @@ export const teamMembers = [
     img: "arnav.jpeg",
   },
   {
-    name: "Olivia Yellow",
+    name: "Arnav Kulkarni",
     title: "Marketing Specialist",
     img: "arnav.jpeg",
   },

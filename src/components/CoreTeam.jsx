@@ -21,10 +21,10 @@ export default function TeamPage() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
-            <h3 className="mb-2 text-lg font-semibold text-center">
+            <h3 className="mb-2 text-lg font-semibold text-center text-black">
               {member.name}
             </h3>
-            <p className="text-sm text-center text-gray-400">{member.title}</p>
+            <p className="text-sm text-center text-black/90">{member.title}</p>
           </div>
         ))}
       </div>

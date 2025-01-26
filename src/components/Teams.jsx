@@ -3,9 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
-import Mentors from "@/components/Mentors";
 import CoreTeam from "@/components/CoreTeam";
-import Leaderboard from "@/components/Leaderboard";
 import Head from "next/head";
 
 const Teams = () => {
@@ -121,18 +119,21 @@ const Teams = () => {
           className="absolute inset-0 z-20 pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle, rgba(0,255,255,0.1) 0%, rgba(0,0,0,0.8) 100%)",
+              "radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,0,0,0.8) 30%)",
           }}
         />
         <div className="relative z-30">
           <section className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="mb-4 text-5xl font-bold">Our Teams</h1>
-            <p className="text-xl text-gray-300">
-              Meet our mentors, core team members, and see the leaderboard.
+            <h1 className="gap-2 mb-10 text-6xl font-bold tracking-wide text-transparent bg-gradient-to-tl from-black/60 to-slate-50 bg-clip-text motion-preset-bounce">
+              <span>Students |&&|</span>
+              <span> Devs |&&| </span>
+              <span>Nerds.</span>
+            </h1>
+            <p className="text-xl text-gray-300 motion-preset-slide-up-left-lg">
+              we do things that we love and now help others to do the same.
             </p>
           </section>
           <CoreTeam />
-          <Mentors />
         </div>
       </div>
     </>
