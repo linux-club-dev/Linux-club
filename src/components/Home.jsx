@@ -25,12 +25,15 @@ const Home = () => {
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      45,
+      75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1500
+      1000
     );
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+    });
 
     sceneRef.current = scene;
     cameraRef.current = camera;
@@ -42,18 +45,18 @@ const Home = () => {
       meshBgElement.appendChild(renderer.domElement);
     }
 
-    const geometry = new THREE.IcosahedronGeometry(5, 3);
+    const geometry = new THREE.IcosahedronGeometry(5, 2);
     const material = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
+      color: 0x00ff00,
       wireframe: true,
-      vertexColors: true,
       transparent: true,
+      opacity: 0.6,
     });
     const mesh = new THREE.Mesh(geometry, material);
     meshRef.current = mesh;
     scene.add(mesh);
 
-    camera.position.z = 20;
+    camera.position.z = 15;
 
     const animate = () => {
       if (
@@ -62,8 +65,8 @@ const Home = () => {
         sceneRef.current &&
         cameraRef.current
       ) {
-        meshRef.current.rotation.x += 0.005;
-        meshRef.current.rotation.y += 0.005;
+        meshRef.current.rotation.x += 0.001;
+        meshRef.current.rotation.y += 0.002;
         rendererRef.current.render(sceneRef.current, cameraRef.current);
       }
       requestAnimationFrame(animate);
@@ -102,19 +105,18 @@ const Home = () => {
       ref={containerRef}
       className="min-h-screen overflow-hidden text-white bg-black"
     >
-      <div id="mesh-background" className="fixed inset-0 z-0 opacity-20" />
-      <motion.div className="fixed inset-0 z-10 pointer-events-none" />
+      <div id="mesh-background" className="fixed inset-0 z-0 opacity-40" />
+      <motion.div className="fixed inset-0 z-10 pointer-events-none bg-gradient-to-b from-black via-transparent to-black opacity-60" />
       <motion.div
         className="absolute inset-0 z-20 pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0.8) 100%)",
+            "radial-gradient(circle at center, rgba(0,255,0,0.15) 0%, rgba(0,0,0,0.9) 70%)",
         }}
       />
       <div className="relative z-30">
         <Hero />
         <About />
-
         <Activities />
         <RecentBlogs />
       </div>
