@@ -14,7 +14,11 @@ const Events = () => {
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
   const meshRef = useRef(null);
-  const [targetDate, setTargetDate] = useState(null);
+
+  // Hardcoded fallback date - March 6, 2025 at 2:00 PM
+  const FALLBACK_DATE = "2025-03-06T14:00:00";
+
+  const [targetDate, setTargetDate] = useState(FALLBACK_DATE);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -25,24 +29,41 @@ const Events = () => {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
-  // Helper function to convert DD-MM-YYYY to a valid date string
+  // Date conversion function
   const convertToValidDateString = (dateStr, timeStr) => {
     try {
-      const [day, month, year] = dateStr.trim().split("-");
-      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")} ${
-        timeStr || "00:00:00"
-      }`;
+      if (!dateStr) return null;
+
+      // If date is in DD-MM-YYYY format
+      if (dateStr.includes("-")) {
+        const parts = dateStr.trim().split("-");
+        if (parts.length === 3) {
+          const [day, month, year] = parts;
+          return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T${
+            timeStr ? timeStr.replace(" ", "") : "00:00:00"
+          }`;
+        }
+      }
+
+      // If it's already in YYYY-MM-DD format
+      return `${dateStr}T${timeStr ? timeStr.replace(" ", "") : "00:00:00"}`;
     } catch (error) {
       console.error("Date parsing error:", error);
       return null;
     }
   };
 
+  // Fetch events
   useEffect(() => {
     const fetchLatestEvent = async () => {
       try {
         setLoading(true);
         const response = await axios.get("/api/admin/events");
+
+        if (!response.data || !response.data.events) {
+          throw new Error("Invalid response format");
+        }
+
         const events = response.data.events;
 
         // Get current timestamp
@@ -84,14 +105,15 @@ const Events = () => {
           if (fullDateString) {
             setTargetDate(fullDateString);
           } else {
-            setError("Invalid date format in event data");
+            // Fallback if parsing fails
+            setTargetDate(FALLBACK_DATE);
           }
-        } else {
-          setTargetDate(null);
         }
       } catch (error) {
         console.error("Error fetching events:", error);
-        setError(error.message);
+        setError("Failed to load events. Using fallback date.");
+        // Always ensure we have a fallback date
+        setTargetDate(FALLBACK_DATE);
       } finally {
         setLoading(false);
       }
@@ -99,6 +121,8 @@ const Events = () => {
 
     fetchLatestEvent();
   }, []);
+
+  // THREE.js setup
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -193,10 +217,13 @@ const Events = () => {
           </h1>
           {loading ? (
             <div className="text-2xl text-green-400">Loading...</div>
-          ) : error ? (
-            <div className="text-2xl text-red-400">Error: {error}</div>
           ) : (
             <Countdown targetDate={targetDate} />
+          )}
+          {error && (
+            <div className="mt-4 text-sm text-yellow-400">
+              Note: Using scheduled event date (March 6, 2025)
+            </div>
           )}
         </section>
         <Timeline />

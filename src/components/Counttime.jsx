@@ -32,14 +32,11 @@ const Countdown = ({ targetDate }) => {
     }
   }, [targetDate]);
 
-  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    // Reset timeLeft when targetDate changes
+    // Set initial time when component mounts or targetDate changes
     setTimeLeft(calculateTimeLeft());
-
-    // Only set up the interval if we have a valid target date
-    if (!targetDate) return;
 
     const timer = setInterval(() => {
       const remaining = calculateTimeLeft();
