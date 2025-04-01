@@ -38,7 +38,7 @@ export async function GET() {
         ],
         message: "Using fallback data due to database connection issue",
       },
-      { status: 200 } // Return 200 with mock data instead of 500
+      { status: 200 }
     );
   }
 }

@@ -1,8 +1,7 @@
-// MongoDB schemea for events at club
 import mongoose from "mongoose";
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let adminSchema = new Schema({
+const eventSchema = new Schema({
   EventName: {
     type: String,
     required: true,
@@ -23,7 +22,12 @@ let adminSchema = new Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
-// global chaching for the model
-const Admin = mongoose.models.Admin || mongoose.model("Admin", adminSchema);
-export default Admin;
+
+// Handle models in ES modules properly
+const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
+export default Event;
