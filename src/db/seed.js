@@ -1,41 +1,10 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+const { default: dbconnect } = require("@/lib/dbconnect");
 
-// Load environment variables first - before any DB operations
-dotenv.config();
-
-// Handle ES modules dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Debug to verify env is loaded
-console.log("MongoDB URI exists:", !!process.env.MONGODB_URI);
-
-// Models - fix imports to work with ESM
-import TeamMember from "../db/models/Teamschema.js";
-import Event from "../db/models/adminschema.js";
-
-// MongoDB connection
-const connectDB = async () => {
-  try {
-    const uri = process.env.MONGODB_URI;
-
-    if (!uri) {
-      throw new Error("MONGODB_URI environment variable is missing");
-    }
-
-    console.log("Connecting to MongoDB...");
-    await mongoose.connect(uri);
-    console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    process.exit(1);
-  }
-};
-
-// Team Members data
+dbconnect()
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.log("MongoDB connection error:", err));
+const mongoose = require("mongoose");
+const TeamMember = require("@/models/TeamMember");
 const teamMembers = [
   { name: "Vrushali Kudante", title: "President", img: "vrushali.jpg" },
   { name: "Pratik Mhalle", title: "Vice president", img: "pratik.jpeg" },

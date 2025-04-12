@@ -172,8 +172,8 @@ export default function TeamPage() {
                 {/* Photo Area */}
                 <div className="flex flex-col items-center flex-grow px-6 pb-4">
                   {/* Photo Border */}
-                  <div className="w-32 h-32 p-1 mb-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500">
-                    <div className="relative w-full h-full overflow-hidden rounded-full">
+                  <div className="p-1 mb-4 rounded-full w-36 h-36 bg-gradient-to-r from-cyan-500 to-blue-500">
+                    <div className="relative w-full h-full p-2 m-1 overflow-hidden rounded-full">
                       <Image
                         src={`/coreteam/${member.img}`}
                         alt={member.name}

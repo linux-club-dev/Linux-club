@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node src/db/seed.js"
+    "seed": "node src/db/seed.js",
+    "seed-events": "node scripts/event-foolder.js"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
