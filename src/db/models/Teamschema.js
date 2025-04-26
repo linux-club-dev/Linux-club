@@ -28,7 +28,8 @@ const teamMemberSchema = new Schema({
   },
 });
 
-// Handle models in ES modules properly
+// FUCK ES MODULES
+// GIMMME MY TS
 const TeamMember =
   mongoose.models.TeamMember || mongoose.model("TeamMember", teamMemberSchema);
 export default TeamMember;
