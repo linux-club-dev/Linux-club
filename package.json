@@ -13,14 +13,15 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "node src/db/seed.js",
-    "seed-events": "node scripts/event-foolder.js"
+    "seed-events": "node scripts/event-foolder.js",
+    "seed-blogs": "node scripts/blogs-flooder.js"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.2",
-    "axios": "^1.7.9",
+    "axios": "^1.8.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
