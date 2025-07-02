@@ -1,10 +1,16 @@
-import dbconnect from "./dbconnect";
+// This file is deprecated - blog fetching is now handled directly in components
+// using useEffect and axios calls to /api/admin/blogs
+
+import axios from "axios";
 
 const fetchBlogs = async () => {
   try {
-    await dbconnect(); // Ensure the database connection is established
-    setLoading(true);
-    const response = await axios.get("/api/admin/blogs");
+    // Use full URL for server-side contexts or ensure this is only called client-side
+    const baseURL =
+      typeof window !== "undefined"
+        ? ""
+        : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const response = await axios.get(`${baseURL}/api/admin/blogs`);
 
     if (response.data && response.data.blogs) {
       // Transform the blog data to match our UI requirements
@@ -22,31 +28,32 @@ const fetchBlogs = async () => {
         link: blog.link,
       }));
 
-      setBlogs(transformedBlogs);
+      return { success: true, data: transformedBlogs };
     } else {
       throw new Error("Invalid response format");
     }
   } catch (err) {
     console.error("Error fetching blogs:", err);
-    setError("Failed to load blogs. Please try again later.");
 
-    // Fallback to mock data if the API fails
-    setBlogs([
-      {
-        id: "fallback-1",
-        title: "Getting Started with Linux: A Beginner's Guide",
-        brief:
-          "Learn the basics of Linux and start your journey into open-source.",
-        slug: "getting-started-with-linux",
-        dateAdded: "2023-09-15",
-        coverImage: "/placeholder.svg?height=200&width=400",
-        readTime: "5 min read",
-        link: "https://medium.com/linuxclub/getting-started-with-linux-beginners-guide",
-      },
-      // Add more fallback items as needed
-    ]);
-  } finally {
-    setLoading(false);
+    // Return fallback data if the API fails
+    return {
+      success: false,
+      error: "Failed to load blogs. Please try again later.",
+      data: [
+        {
+          id: "fallback-1",
+          title: "Getting Started with Linux: A Beginner's Guide",
+          brief:
+            "Learn the basics of Linux and start your journey into open-source.",
+          slug: "getting-started-with-linux",
+          dateAdded: "2023-09-15",
+          coverImage: "/placeholder.svg?height=200&width=400",
+          readTime: "5 min read",
+          link: "https://medium.com/linuxclub/getting-started-with-linux-beginners-guide",
+        },
+      ],
+    };
   }
 };
+
 export default fetchBlogs;

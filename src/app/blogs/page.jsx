@@ -5,14 +5,65 @@ import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Calendar, Eye } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
-import fetchBlogs from "@/lib/fetchblogs";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const newblogs = fetchBlogs();
-  setBlogs(newblogs);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/api/admin/blogs");
+
+        if (response.data && response.data.blogs) {
+          // Transform the blog data to match your UI requirements
+          const transformedBlogs = response.data.blogs.map((blog) => ({
+            id: blog._id,
+            title: blog.title,
+            brief: `Check out this article on ${blog.title.toLowerCase()}.`,
+            slug: blog.title
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+              .replace(/[^\w-]+/g, ""),
+            dateAdded: new Date(blog.createdAt).toISOString().split("T")[0],
+            coverImage: "/placeholder.svg?height=200&width=400",
+            readTime: `${Math.max(
+              3,
+              Math.floor(blog.title.length / 5)
+            )} min read`,
+            link: blog.link,
+          }));
+
+          setBlogs(transformedBlogs);
+        }
+      } catch (err) {
+        console.error("Error fetching blogs:", err);
+        setError("Failed to load blogs. Please try again later.");
+
+        // Set fallback data
+        setBlogs([
+          {
+            id: "fallback-1",
+            title: "Getting Started with Linux: A Beginner's Guide",
+            brief:
+              "Learn the basics of Linux and start your journey into open-source.",
+            slug: "getting-started-with-linux",
+            dateAdded: "2023-09-15",
+            coverImage: "/placeholder.svg?height=200&width=400",
+            readTime: "5 min read",
+            link: "https://medium.com/linuxclub/getting-started-with-linux-beginners-guide",
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []); // Empty dependency array ensures this runs only once
+
   return (
     <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-900 to-black">
       <div className="absolute inset-0 bg-[url('/circuit-board.svg')] opacity-10 z-0"></div>
