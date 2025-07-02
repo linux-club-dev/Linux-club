@@ -344,9 +344,9 @@ const AdminPanel = () => {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Terminal className="w-8 h-8 text-green-500" />
+                <Terminal className="w-8 h-8 mt-3 text-green-500" />
                 <div>
-                  <h1 className="mb-1 text-4xl font-bold text-green-500">
+                  <h1 className="mt-3 mb-1 text-4xl font-bold text-green-500">
                     $ linux-club --admin
                   </h1>
                   <p className="text-sm text-green-400">
