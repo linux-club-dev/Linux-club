@@ -11,19 +11,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 // MongoDB connection
-const dbconnect = async () => {
-  try {
-    const MONGODB_URI = process.env.MONGODB_URI || "";
-
-    console.log("Connecting to MongoDB...");
-    await mongoose.connect(MONGODB_URI);
-    console.log("MongoDB connected successfully");
-    return mongoose.connection;
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    process.exit(1);
-  }
-};
+import dbconnect from "@/lib/dbconnect";
 
 // Define Event schema directly in this script
 const eventSchema = new mongoose.Schema({

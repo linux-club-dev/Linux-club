@@ -5,69 +5,14 @@ import { motion } from "framer-motion";
 import { ArrowRight, Terminal, Calendar, Eye } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
+import fetchBlogs from "@/lib/fetchblogs";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Function to fetch blogs from the API
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("/api/admin/blogs");
-
-        if (response.data && response.data.blogs) {
-          // Transform the blog data to match our UI requirements
-          const transformedBlogs = response.data.blogs.map((blog) => ({
-            id: blog._id,
-            title: blog.title,
-            brief: `Check out this article on ${blog.title.toLowerCase()}.`,
-            slug: blog.title
-              .toLowerCase()
-              .replace(/\s+/g, "-")
-              .replace(/[^\w-]+/g, ""),
-            dateAdded: new Date(blog.createdAt).toISOString().split("T")[0],
-            coverImage: "/placeholder.svg?height=200&width=400",
-            readTime: `${Math.max(
-              3,
-              Math.floor(blog.title.length / 5)
-            )} min read`,
-            link: blog.link,
-          }));
-
-          setBlogs(transformedBlogs);
-        } else {
-          throw new Error("Invalid response format");
-        }
-      } catch (err) {
-        console.error("Error fetching blogs:", err);
-        setError("Failed to load blogs. Please try again later.");
-
-        // Fallback to mock data if the API fails
-        setBlogs([
-          {
-            id: "fallback-1",
-            title: "Getting Started with Linux: A Beginner's Guide",
-            brief:
-              "Learn the basics of Linux and start your journey into open-source.",
-            slug: "getting-started-with-linux",
-            dateAdded: "2023-09-15",
-            coverImage: "/placeholder.svg?height=200&width=400",
-            readTime: "5 min read",
-            link: "https://medium.com/linuxclub/getting-started-with-linux-beginners-guide",
-          },
-          // Add more fallback items as needed
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
-  }, []);
-
+  const newblogs = fetchBlogs();
+  setBlogs(newblogs);
   return (
     <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-900 to-black">
       <div className="absolute inset-0 bg-[url('/circuit-board.svg')] opacity-10 z-0"></div>
@@ -78,7 +23,8 @@ export default function Blogs() {
           transition={{ duration: 0.8 }}
           className="mb-12 text-4xl font-bold text-center text-green-400 md:text-5xl"
         >
-          Latest Insights from Our Tech Wizards
+          Tech Articles we recommend
+          <span className="text-white"> Cureated by us. for you</span>
         </motion.h2>
 
         {error && (

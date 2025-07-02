@@ -31,22 +31,7 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
-// MongoDB connection
-const dbconnect = async () => {
-  try {
-    const MONGODB_URI =
-      process.env.MONGODB_URI ||
-      "mongodb+srv://admin:Veddev5204@cluster0.zohjdlx.mongodb.net/Linclub";
-
-    console.log("Connecting to MongoDB...");
-    await mongoose.connect(MONGODB_URI);
-    console.log("MongoDB connected successfully");
-    return mongoose.connection;
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    process.exit(1);
-  }
-};
+import dbconnect from "@/lib/dbconnect";
 
 const blogsssgooobrrrrrr = async () => {
   let connection;
